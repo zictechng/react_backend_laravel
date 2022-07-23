@@ -454,31 +454,20 @@ class ProfileUpdateController extends Controller
 
     // fetch user details into context hooks
 
-    public function getUser()
+    public function getUser($email)
     {
-        // check if user is login
-        if (auth('sanctum')->check()) {
 
-            // get sender details
-            $user_details = auth('sanctum')->user();
-            $user = User::where('email', $user_details->email)->where('acct_status', 'Active')->first();
-            if (!$user) {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'Missing parameter in your account',
-                ]);
-            } else {
-                return response()->json([
-                    'status' => 200,
-                    // 'validator_err' => $validator->messages(),
-                    'userDetails' => $user,
-                ]);
-            }
-        } else {
+        $user = User::where('email', $email)->where('acct_status', 'Active')->first();
+        if (!$user) {
             return response()->json([
                 'status' => 404,
-                // 'validator_err' => $validator->messages(),
                 'message' => 'Missing parameter in your account',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 200,
+                // 'validator_err' => $validator->messages(),
+                'userDetails' => $user,
             ]);
         }
     }

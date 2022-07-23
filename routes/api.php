@@ -47,7 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('update_password', [ProfileUpdateController::class, 'updateUserPassword']);
     Route::post('send_ticket', [ProfileUpdateController::class, 'submitTicket']);
     Route::get('get_user', [AuthController::class, 'getLoginUser']);
-    Route::get('load_user', [ProfileUpdateController::class, 'getUser']);
+    Route::get('load_user/{email}', [ProfileUpdateController::class, 'getUser']);
     Route::get('check_login', [ProfileUpdateController::class, 'getLogin']);
     Route::get('search/{key}', [ProfileUpdateController::class, 'search']);
     Route::delete('delete-history/{id}', [ProfileUpdateController::class, 'delete']);
